@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,17 +25,17 @@
     label {
       display: block;
       margin: 1rem 0 0.25rem;
-      white-space: normal;
+      font-weight: bold;
     }
-    input[type="text"], input[type="email"] {
+    .question {
+      margin-top: 1.5rem;
+    }
+    input[type="text"], input[type="number"], input[type="email"] {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 1rem;
       border-radius: 5px;
       border: 1px solid #ccc;
-    }
-    .question {
-      margin-top: 1rem;
     }
     .checkbox-group {
       display: flex;
@@ -56,102 +57,104 @@
       font-weight: bold;
       color: #FF5722;
     }
+    .message {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <h1>Join AIMe Beta</h1>
-  <form id="aime-form">
-
-    <label for="name">Full Name</label>
-    <input type="text" name="Name" required>
+  <form id="betaForm">
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="FullName" required>
 
     <label for="location">Location (City, Country)</label>
-    <input type="text" name="Location" required>
+    <input type="text" id="location" name="Location" required>
 
-    <label for="email">Email (verifiable)</label>
-    <input type="email" name="Email" required>
+    <label for="age">Age</label>
+    <input type="number" id="age" name="Age" required>
+
+    <label for="email">Email (we'll verify it)</label>
+    <input type="email" id="email" name="Email" required>
 
     <hr>
 
     <div class="question">
       <label>Do you want to be an evolving self forever?</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="Q1" value="Yes"> ✓</label>
-        <label><input type="checkbox" name="Q1" value="No"> ✗</label>
+        <label><input type="radio" name="Q1" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q1" value="No"> ✗</label>
       </div>
     </div>
 
     <div class="question">
       <label>Would you like Socrates' view on today's world?</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="Q2" value="Yes"> ✓</label>
-        <label><input type="checkbox" name="Q2" value="No"> ✗</label>
+        <label><input type="radio" name="Q2" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q2" value="No"> ✗</label>
       </div>
     </div>
 
     <div class="question">
-      <label>Want to leave a trace of your mind for future generations to explore?</label>
+      <label>Want to leave a trace of your mind for future generations?</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="Q3" value="Yes"> ✓</label>
-        <label><input type="checkbox" name="Q3" value="No"> ✗</label>
+        <label><input type="radio" name="Q3" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q3" value="No"> ✗</label>
       </div>
     </div>
 
     <div class="question">
       <label>Would you like to observe your own life as a third-person?</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="Q4" value="Yes"> ✓</label>
-        <label><input type="checkbox" name="Q4" value="No"> ✗</label>
+        <label><input type="radio" name="Q4" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q4" value="No"> ✗</label>
       </div>
     </div>
 
     <div class="question">
       <label>Curious to see your beliefs reflected in debates centuries from now?</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="Q5" value="Yes"> ✓</label>
-        <label><input type="checkbox" name="Q5" value="No"> ✗</label>
+        <label><input type="radio" name="Q5" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q5" value="No"> ✗</label>
       </div>
     </div>
 
     <button type="submit">Submit</button>
-
-    <div class="counter">
-      4,999,213 spots left
-    </div>
+    <div class="counter">4,999,213 spots left</div>
+    <div class="message" id="responseMessage"></div>
   </form>
 
   <script>
-    document.getElementById('aime-form').addEventListener('submit', async function(e) {
+    const form = document.getElementById('betaForm');
+    const responseMessage = document.getElementById('responseMessage');
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const form = e.target;
       const formData = new FormData(form);
       const data = {};
-      formData.forEach((value, key) => {
-        if (!data[key]) {
-          data[key] = value;
-        }
-      });
+      formData.forEach((value, key) => data[key] = value);
 
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbzCGKS7MXn56wSbAoTSL_K_mxjlJbBbCJNJ1VQyZV_3D28VqgS1_ibhIij3FAMyqEjI/exec', {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbzivuM0Z-KwkC61SPTy43d8yYAyQ8VxhMMRWoZTcjsYpjs1i9-4sfv5qD15YCDDbjm8/exec', {
           method: 'POST',
-          body: JSON.stringify(data),
           headers: {
             'Content-Type': 'application/json'
-          }
+          },
+          body: JSON.stringify(data)
         });
 
-        const result = await response.json();
-        if (result.result === 'success') {
-          alert('Thank you for signing up!');
+        if (res.ok) {
+          responseMessage.textContent = "🎉 You're in! Check your email soon.";
           form.reset();
         } else {
-          alert('Submission failed. Please try again.');
+          responseMessage.textContent = "⚠️ Something went wrong. Try again later.";
         }
       } catch (error) {
-        alert('Submission failed. Please check your network connection or try again later.');
-        console.error('Submission error:', error);
+        console.error('Error:', error);
+        responseMessage.textContent = "🚫 Submission failed. Please check your connection.";
       }
     });
   </script>
