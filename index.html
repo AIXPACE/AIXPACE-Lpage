@@ -24,31 +24,22 @@
     label {
       display: block;
       margin: 1rem 0 0.25rem;
+      font-weight: bold;
     }
-    input[type="text"], input[type="email"], input[type="number"], select {
+    .question {
+      margin-top: 1.5rem;
+    }
+    input[type="text"], input[type="number"], input[type="email"] {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 1rem;
       border-radius: 5px;
       border: 1px solid #ccc;
     }
-    .question {
+    .checkbox-group {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
+      gap: 1rem;
       margin-bottom: 1rem;
-    }
-    .question span {
-      flex: 1 1 70%;
-    }
-    .question .options {
-      flex: 1 1 30%;
-      display: flex;
-      gap: 0.5rem;
-      justify-content: flex-end;
-    }
-    .options label {
-      margin: 0;
     }
     button {
       padding: 0.75rem 1.5rem;
@@ -65,72 +56,106 @@
       font-weight: bold;
       color: #FF5722;
     }
+    .message {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <h1>Join AIMe Beta</h1>
-  <form action="https://script.google.com/macros/s/AKfycbzivuM0Z-KwkC61SPTy43d8yYAyQ8VxhMMRWoZTcjsYpjs1i9-4sfv5qD15YCDDbjm8/exec" method="POST">
-
-    <label for="name">Full Name</label>
-    <input type="text" name="Name" required>
+  <form id="betaForm">
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="FullName" required>
 
     <label for="location">Location (City, Country)</label>
-    <input type="text" name="Location" required>
+    <input type="text" id="location" name="Location" required>
 
     <label for="age">Age</label>
-    <input type="number" name="Age" required>
+    <input type="number" id="age" name="Age" required>
 
-    <label for="email">Email (must be verifiable)</label>
-    <input type="email" name="Email" required>
+    <label for="email">Email (we'll verify it)</label>
+    <input type="email" id="email" name="Email" required>
 
     <hr>
 
     <div class="question">
-      <span>Do you want to be an evolving self forever?</span>
-      <div class="options">
+      <label>Do you want to be an evolving self forever?</label>
+      <div class="checkbox-group">
         <label><input type="radio" name="Q1" value="Yes" required> ✓</label>
         <label><input type="radio" name="Q1" value="No"> ✗</label>
       </div>
     </div>
 
     <div class="question">
-      <span>Would you like Socrates' view on today's world?</span>
-      <div class="options">
+      <label>Would you like Socrates' view on today's world?</label>
+      <div class="checkbox-group">
         <label><input type="radio" name="Q2" value="Yes" required> ✓</label>
         <label><input type="radio" name="Q2" value="No"> ✗</label>
       </div>
     </div>
 
     <div class="question">
-      <span>Want to leave a trace of your mind for future generations to explore?</span>
-      <div class="options">
+      <label>Want to leave a trace of your mind for future generations?</label>
+      <div class="checkbox-group">
         <label><input type="radio" name="Q3" value="Yes" required> ✓</label>
         <label><input type="radio" name="Q3" value="No"> ✗</label>
       </div>
     </div>
 
     <div class="question">
-      <span>Would you like to observe your own life as a third-person?</span>
-      <div class="options">
+      <label>Would you like to observe your own life as a third-person?</label>
+      <div class="checkbox-group">
         <label><input type="radio" name="Q4" value="Yes" required> ✓</label>
         <label><input type="radio" name="Q4" value="No"> ✗</label>
       </div>
     </div>
 
     <div class="question">
-      <span>Curious to see your beliefs reflected in debates centuries from now?</span>
-      <div class="options">
+      <label>Curious to see your beliefs reflected in debates centuries from now?</label>
+      <div class="checkbox-group">
         <label><input type="radio" name="Q5" value="Yes" required> ✓</label>
         <label><input type="radio" name="Q5" value="No"> ✗</label>
       </div>
     </div>
 
     <button type="submit">Submit</button>
-
-    <div class="counter">
-      4,999,213 spots left
-    </div>
+    <div class="counter">4,999,213 spots left</div>
+    <div class="message" id="responseMessage"></div>
   </form>
+
+  <script>
+    const form = document.getElementById('betaForm');
+    const responseMessage = document.getElementById('responseMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+
+      try {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbzivuM0Z-KwkC61SPTy43d8yYAyQ8VxhMMRWoZTcjsYpjs1i9-4sfv5qD15YCDDbjm8/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          responseMessage.textContent = "🎉 You're in! Check your email soon.";
+          form.reset();
+        } else {
+          responseMessage.textContent = "⚠️ Something went wrong. Try again later.";
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        responseMessage.textContent = "🚫 Submission failed. Please check your connection.";
+      }
+    });
+  </script>
 </body>
 </html>
-
