@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AIMe Beta Sign-Up</title>
   <style>
     body {
@@ -27,9 +27,6 @@
       margin: 1rem 0 0.25rem;
       font-weight: bold;
     }
-    .question {
-      margin-top: 1.5rem;
-    }
     input[type="text"], input[type="number"], input[type="email"] {
       width: 100%;
       padding: 0.5rem;
@@ -51,12 +48,6 @@
       cursor: pointer;
       font-size: 1rem;
     }
-    .counter {
-      text-align: right;
-      margin-top: 1rem;
-      font-weight: bold;
-      color: #FF5722;
-    }
     .message {
       text-align: center;
       margin-top: 1rem;
@@ -68,13 +59,10 @@
   <h1>Join AIMe Beta</h1>
   <form id="betaForm">
     <label for="fullName">Full Name</label>
-    <input type="text" id="fullName" name="FullName" required>
+    <input type="text" id="fullName" name="Name" required>
 
     <label for="location">Location (City, Country)</label>
     <input type="text" id="location" name="Location" required>
-
-    <label for="age">Age</label>
-    <input type="number" id="age" name="Age" required>
 
     <label for="email">Email (we'll verify it)</label>
     <input type="email" id="email" name="Email" required>
@@ -122,7 +110,6 @@
     </div>
 
     <button type="submit">Submit</button>
-    <div class="counter">4,999,213 spots left</div>
     <div class="message" id="responseMessage"></div>
   </form>
 
@@ -138,7 +125,7 @@
       formData.forEach((value, key) => data[key] = value);
 
       try {
-        const res = await fetch('https://script.google.com/macros/s/AKfycbzivuM0Z-KwkC61SPTy43d8yYAyQ8VxhMMRWoZTcjsYpjs1i9-4sfv5qD15YCDDbjm8/exec', {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbwiU0UnwE2txsIDiSvdKxODK9oVRUPfpge6yj8mR4lKJ_BamktBm3bxy_vYuKF9VQDl/exec', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
