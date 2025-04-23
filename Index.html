@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Join AIme Beta</title>
+</head>
+<body>
+  <h1>Be Part of the AIme Beta!</h1>
+  <form id="signup-form">
+    <label>Name: <input type="text" name="name" required></label><br>
+    <label>Age: <input type="number" name="age" required></label><br>
+    <label>Location: <input type="text" name="location" required></label><br>
+    <label>Email: <input type="email" name="email" required></label><br>
+
+    <!-- 5 survey questions -->
+    <label>1. Do you use AI tools today?
+      <input type="radio" name="q1" value="Yes" required> Yes
+      <input type="radio" name="q1" value="No"> No
+    </label><br>
+
+    <label>2. Are you curious about AI personality agents?
+      <input type="radio" name="q2" value="Yes" required> Yes
+      <input type="radio" name="q2" value="No"> No
+    </label><br>
+
+    <label>3. Would you train your own AI copy?
+      <input type="radio" name="q3" value="Yes" required> Yes
+      <input type="radio" name="q3" value="No"> No
+    </label><br>
+
+    <label>4. Would you pay to preserve your personality digitally?
+      <input type="radio" name="q4" value="Yes" required> Yes
+      <input type="radio" name="q4" value="No"> No
+    </label><br>
+
+    <label>5. Would you like to shape the future of AI?
+      <input type="radio" name="q5" value="Yes" required> Yes
+      <input type="radio" name="q5" value="No"> No
+    </label><br>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      const data = {
+        name: formData.get('name'),
+        age: formData.get('age'),
+        location: formData.get('location'),
+        email: formData.get('email'),
+        q1: formData.get('q1'),
+        q2: formData.get('q2'),
+        q3: formData.get('q3'),
+        q4: formData.get('q4'),
+        q5: formData.get('q5')
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbzivuM0Z-KwkC61SPTy43d8yYAyQ8VxhMMRWoZTcjsYpjs1i9-4sfv5qD15YCDDbjm8/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Thank you for signing up!');
+      })
+      .catch(error => {
+        alert('There was an error. Please try again.');
+        console.error('Error:', error);
+      });
+    });
+  </script>
+</body>
+</html>
