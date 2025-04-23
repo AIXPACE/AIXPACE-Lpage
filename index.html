@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AIMe Beta Sign-Up</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 1rem 0 0.25rem;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .counter {
+      text-align: right;
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #FF5722;
+    }
+  </style>
+</head>
+<body>
+  <h1>Join AIMe Beta</h1>
+  <form action="https://script.google.com/macros/s/AKfycbzivuM0Z-KwkC61SPTy43d8yYAyQ8VxhMMRWoZTcjsYpjs1i9-4sfv5qD15YCDDbjm8/exec" method="POST">
+    
+    <label for="name">Name</label>
+    <input type="text" name="Name" required>
+
+    <label for="location">Location</label>
+    <input type="text" name="Location" required>
+
+    <label for="age">Age</label>
+    <input type="number" name="Age" required>
+
+    <label for="email">Email</label>
+    <input type="email" name="Email" required>
+
+    <hr>
+
+    <label>1. AI can replace human creativity. (✓ / ✗)</label>
+    <input type="text" name="Q1" required>
+
+    <label>2. You trust AI to make decisions for you. (✓ / ✗)</label>
+    <input type="text" name="Q2" required>
+
+    <label>3. AI should be allowed to learn from your personal data. (✓ / ✗)</label>
+    <input type="text" name="Q3" required>
+
+    <button type="submit">Submit</button>
+    
+    <div class="counter">
+      4,999,213 spots left
+    </div>
+  </form>
+</body>
+</html>
