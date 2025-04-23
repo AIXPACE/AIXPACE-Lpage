@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AIXPACE Beta Sign-Up</title>
+  <title>AIMe Beta Sign-Up</title>
   <style>
     body {
       font-family: sans-serif;
@@ -25,12 +25,30 @@
       display: block;
       margin: 1rem 0 0.25rem;
     }
-    input, select {
+    input[type="text"], input[type="email"], input[type="number"], select {
       width: 100%;
       padding: 0.5rem;
       margin-bottom: 1rem;
       border-radius: 5px;
       border: 1px solid #ccc;
+    }
+    .question {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .question span {
+      flex: 1 1 70%;
+    }
+    .question .options {
+      flex: 1 1 30%;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    }
+    .options label {
+      margin: 0;
     }
     button {
       padding: 0.75rem 1.5rem;
@@ -50,37 +68,62 @@
   </style>
 </head>
 <body>
-  <h1>Join AIXPACE Beta</h1>
-  <form action="https://script.google.com/macros/s/AKfycbzmxxKHvIa-QkVljexm7cYbOTKSil1AUcE4m1u_Sn-GAjivuS1YTFiFJWzfYwQz8kYD/exec" method="POST">
+  <h1>Join AIMe Beta</h1>
+  <form action="https://script.google.com/macros/s/AKfycbzivuM0Z-KwkC61SPTy43d8yYAyQ8VxhMMRWoZTcjsYpjs1i9-4sfv5qD15YCDDbjm8/exec" method="POST">
 
-    <label for="name">Name</label>
+    <label for="name">Full Name</label>
     <input type="text" name="Name" required>
 
-    <label for="location">Location</label>
+    <label for="location">Location (City, Country)</label>
     <input type="text" name="Location" required>
 
     <label for="age">Age</label>
     <input type="number" name="Age" required>
 
-    <label for="email">Email</label>
+    <label for="email">Email (must be verifiable)</label>
     <input type="email" name="Email" required>
 
     <hr>
 
-    <label>1. Do you want to be an evolving self forever? (✓ / ✗)</label>
-    <input type="text" name="Q1" required>
+    <div class="question">
+      <span>Do you want to be an evolving self forever?</span>
+      <div class="options">
+        <label><input type="radio" name="Q1" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q1" value="No"> ✗</label>
+      </div>
+    </div>
 
-    <label>2. Would you like Socrates' view on today's world? (✓ / ✗)</label>
-    <input type="text" name="Q2" required>
+    <div class="question">
+      <span>Would you like Socrates' view on today's world?</span>
+      <div class="options">
+        <label><input type="radio" name="Q2" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q2" value="No"> ✗</label>
+      </div>
+    </div>
 
-    <label>3. Want to leave a trace of your mind for future generations to explore? (✓ / ✗)</label>
-    <input type="text" name="Q3" required>
+    <div class="question">
+      <span>Want to leave a trace of your mind for future generations to explore?</span>
+      <div class="options">
+        <label><input type="radio" name="Q3" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q3" value="No"> ✗</label>
+      </div>
+    </div>
 
-    <label>4. Would you like to observe your own life as a third-person? (✓ / ✗)</label>
-    <input type="text" name="Q4" required>
+    <div class="question">
+      <span>Would you like to observe your own life as a third-person?</span>
+      <div class="options">
+        <label><input type="radio" name="Q4" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q4" value="No"> ✗</label>
+      </div>
+    </div>
 
-    <label>5. Curious to see your beliefs reflected in debates centuries from now? (✓ / ✗)</label>
-    <input type="text" name="Q5" required>
+    <div class="question">
+      <span>Curious to see your beliefs reflected in debates centuries from now?</span>
+      <div class="options">
+        <label><input type="radio" name="Q5" value="Yes" required> ✓</label>
+        <label><input type="radio" name="Q5" value="No"> ✗</label>
+      </div>
+    </div>
 
     <button type="submit">Submit</button>
 
@@ -90,3 +133,4 @@
   </form>
 </body>
 </html>
+
